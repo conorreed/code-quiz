@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #quiz-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #start-screen, #question-screen, #score-screen {
+    margin-bottom: 20px;
+  }
+  
+  #question-screen ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #question-screen .choice {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: left;
+  }
+  
+  #question-screen .choice:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  #high-scores {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #high-scores li {
+    margin-bottom: 5px;
+  }
+  
+  #high-scores li span {
+    font-weight: bold;
+  }
+  
+  #high-scores li::before {
+    content: " - ";
+  }
+  
+  #high-scores li:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  

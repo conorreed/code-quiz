@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <div id="quiz-container">
+    <div id="start-screen">
+      <h1>Welcome to the Code Quiz</h1>
+      <button id="start-button">Start Quiz</button>
+    </div>
+
+    <div id="question-screen" style="display: none;">
+      <h2 id="question-text">Question goes here</h2>
+      <ul id="answer-choices">
+        <li><button class="choice">Choice A</button></li>
+        <li><button class="choice">Choice B</button></li>
+        <li><button class="choice">Choice C</button></li>
+        <li><button class="choice">Choice D</button></li>
+      </ul>
+    </div>
+
+    <div id="score-screen" style="display: none;">
+      <h2>Your Score: <span id="final-score">0</span></h2>
+      <label for="initials">Enter your initials:</label>
+      <input type="text" id="initials" placeholder="Your initials">
+      <button id="save-score">Save Score</button>
+      <h2>High Scores</h2>
+      <ul id="high-scores">
+        <!-- High scores will be dynamically added here -->
+      </ul>
+    </div>
+  </div>
+
+  <script src="./assets/script.js"></script>
+</body>
+</html>
