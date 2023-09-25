@@ -9,3 +9,24 @@
 // THEN the game is over
 // WHEN the game is over
 // THEN I can save my initials and score
+
+
+//create any necessary global variables
+
+
+//implement functionality for starting the timer
+
+
+// present the questions
+
+
+//handling user answers
+
+
+//subtracting time for incorrect answers
+
+
+//ending the game
+
+
+// allow user to save their initials and score
