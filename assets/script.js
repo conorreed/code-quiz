@@ -81,7 +81,56 @@ function showScore() {
     "final-score"
   ).textContent = `${correctAnswers} out of ${data.length}`;
 
+    // Retrieve high scores from local storage
+    let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+    // Get user's initials
+    const initialsInput = document.getElementById("initials");
+    const initials = initialsInput.value;
+  
+    if (!initials) {
+      alert("Please enter your initials.");
+      return;
+    }
+  
+    // Create a score object
+    const score = {
+      initials: initials,
+      score: correctAnswers,
+    };
+  
+    // Add the current score to the high scores
+    highScores.push(score);
+  
+    // Sort high scores by score (descending order)
+    highScores.sort((a, b) => b.score - a.score);
+  
+    // Limit the number of high scores to display (e.g., top 5)
+    highScores = highScores.slice(0, 5);
+  
+    // Save the updated high scores to local storage
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+  
+    // Display high scores
+    displayHighScores(highScores);
+  }
+
+// Display high scores
+function displayHighScores(highScores) {
+  const highScoresList = document.getElementById("high-scores");
+  highScoresList.innerHTML = ""; // Clear previous entries
+
+  for (const score of highScores) {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${score.initials}: ${score.score}`;
+    highScoresList.appendChild(listItem);
+  }
 }
+
+// Event listener for "Save Score" button
+const saveScoreButton = document.getElementById("save-score");
+saveScoreButton.addEventListener("click", showScore);
+
 
 // update data with the user's answer
 function saveAnswer(answer) {
