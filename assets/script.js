@@ -10,128 +10,124 @@
 // WHEN the game is over
 // THEN I can save my initials and score
 
-
 //create any necessary global variables
 
 const data = [
-    {
-        question: "How many legs does a cat have?", // stuff into question-text element
-        choices: [ // create the li elements on the fly, depending on how many choices are in the object
-            "One", 
-            "Two",
-            "Three", 
-            "Four"
-        ],
-        correctAnswer: "Four",
-        userAnswer: "",
-    },
-    {
-        question: "How many legs does a dog have?",
-        choices: [
-            "Three", 
-            "Four"
-        ],
-        correctAnswer: "Four",
-        userAnswer: "",
-    },
-    {
-        question: "How many legs does a spider have?",
-        choices: [
-            "Three", 
-            "Six",
-            "Eight"
-        ],
-        correctAnswer: "Eight",
-        userAnswer: "",
-    },
+  {
+    question: "How many legs does a cat have?", // stuff into question-text element
+    choices: [
+      // create the li elements on the fly, depending on how many choices are in the object
+      "One",
+      "Two",
+      "Three",
+      "Four",
+    ],
+    correctAnswer: "Four",
+    userAnswer: "",
+  },
+  {
+    question: "How many legs does a dog have?",
+    choices: ["Three", "Four"],
+    correctAnswer: "Four",
+    userAnswer: "",
+  },
+  {
+    question: "How many legs does a spider have?",
+    choices: ["Three", "Six", "Eight"],
+    correctAnswer: "Eight",
+    userAnswer: "",
+  },
 ];
 
-let currentIndex = 0; // current question
+let currentIndex = 0; // current question in the data
+const quizDurationSeconds = 60;
+let elapsedSeconds = 0; 
 
+// define functions
 
-/* const questionOne = {A:"",B:"",C:"",D:""};
-const questionTwo = {A:"",B:"",C:"",D:""};
-const questionThree = {A:"",B:"",C:"",D:""};
-const questionFour = {A:"",B:"",C:"",D:""};
-const questionFive = {A:"",B:"",C:"",D:""};
-const questionSix = {A:"",B:"",C:"",D:""};
-const questionSeven = {A:"",B:"",C:"",D:""};
-const questionEight = {A:"",B:"",C:"",D:""};
-const questionNine = {A:"",B:"",C:"",D:""};
-const questionTen = {A:"",B:"",C:"",D:""}; */
+// present the questions
+function showQuestion(currentItem) {
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("question-screen").style.display = "block";
+  document.getElementById("question-text").textContent = currentItem.question;
 
+  const ul = document.getElementById("answer-choices");
 
+  let child = ul.lastElementChild;
+  while (child) {
+    ul.removeChild(child);
+    child = ul.lastElementChild;
+  }
 
-// Function to end the quiz
-function endQuiz() {
-  // Display the score screen or any other actions you need to take when the quiz ends
-  
+  for (let index = 0; index < currentItem.choices.length; index++) {
+    const li = document.createElement("li");
+    const button = document.createElement("button");
+    button.textContent = currentItem.choices[index];
+    button.className = "choice";
+    li.appendChild(button);
+    ul.appendChild(li);
+    button.addEventListener("click", () => saveAnswer(button.textContent));
+  }
 }
 
-// Example usage: Call startTimer() when you start the quiz
-startTimer();
-const quizDurationSeconds = 60;  
-let timeRemaining = quizDurationSeconds;
-let timerInterval;
+// score the quiz and show results
+function showScore() {
+  document.getElementById("question-screen").style.display = "none";
+  document.getElementById("score-screen").style.display = "block";
+
+  const correctAnswers = data.filter(question => question.correctAnswer === question.userAnswer).length;
+
+  document.getElementById(
+    "final-score"
+  ).textContent = `${correctAnswers} out of ${data.length}`;
+
+}
+
+// update data with the user's answer
+function saveAnswer(answer) {
+  const item = data[currentIndex];
+  item.userAnswer = answer;
+
+  if (item.userAnswer !== item.correctAnswer) {
+    elapsedSeconds += 10;
+  }
+
+  if ((currentIndex === data.length - 1)) {
+    showScore()
+  } else {
+    currentIndex++;
+    showQuestion(data[currentIndex]);
+  }
+}
 
 // Function to start the timer
 function startTimer() {
   // Update the timer every second
-  timerInterval = setInterval(function() {
+
+  timerInterval = setInterval(function () {
     // Display the time remaining
-    document.getElementById('timer').textContent = `Time: ${timeRemaining}s`;
+
+    elapsedSeconds++;
+
+    let secondsRemaining = quizDurationSeconds - elapsedSeconds;
+
+    document.getElementById(
+      "timer"
+    ).textContent = `Seconds Remaining: ${secondsRemaining}`;
 
     // Check if the time has run out
-    if (timeRemaining <= 0) {
+
+    if (secondsRemaining <= 0) {
       clearInterval(timerInterval);
-      endQuiz();
-    } else {
-      // Decrease the time by 1 second
-      timeRemaining--;
+      showScore();
     }
   }, 1000);
 }
 
-// Function to stop the timer
-function stopTimer() {
-  clearInterval(timerInterval);
+function startQuiz() {
+  startTimer();
+  showQuestion(data[currentIndex]);
 }
 
-// Function to end the quiz
-function endQuiz() {
-  // Display the score screen or any other actions you need to take when the quiz ends
-}
-
-// Example usage: Call startTimer() when you start the quiz
-startTimer();
-
-showQuestion(data[currentIndex]);
-
-
-
-//implement functionality for starting the timer
-
-// present the questions
-function showQuestion(currentItem) {
-    // stuff item properties into html
-}
-
-//handling user answers
-function checkAnswers() {
-
-}
-
-//subtracting time for incorrect answers
-function subtractTime() {
-
-}
-
-//ending the game
-function endGame() {
-
-}
-
-// allow user to save their initials and score
-function saveScore() {
-
-}
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", startQuiz);
