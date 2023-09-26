@@ -12,7 +12,44 @@
 
 
 //create any necessary global variables
-const questionOne = {A:"",B:"",C:"",D:""};
+
+const data = [
+    {
+        question: "How many legs does a cat have?", // stuff into question-text element
+        choices: [ // create the li elements on the fly, depending on how many choices are in the object
+            "One", 
+            "Two",
+            "Three", 
+            "Four"
+        ],
+        correctAnswer: "Four",
+        userAnswer: "",
+    },
+    {
+        question: "How many legs does a dog have?",
+        choices: [
+            "Three", 
+            "Four"
+        ],
+        correctAnswer: "Four",
+        userAnswer: "",
+    },
+    {
+        question: "How many legs does a spider have?",
+        choices: [
+            "Three", 
+            "Six",
+            "Eight"
+        ],
+        correctAnswer: "Eight",
+        userAnswer: "",
+    },
+];
+
+let currentIndex = 0; // current question
+
+
+/* const questionOne = {A:"",B:"",C:"",D:""};
 const questionTwo = {A:"",B:"",C:"",D:""};
 const questionThree = {A:"",B:"",C:"",D:""};
 const questionFour = {A:"",B:"",C:"",D:""};
@@ -21,17 +58,14 @@ const questionSix = {A:"",B:"",C:"",D:""};
 const questionSeven = {A:"",B:"",C:"",D:""};
 const questionEight = {A:"",B:"",C:"",D:""};
 const questionNine = {A:"",B:"",C:"",D:""};
-const questionTen = {A:"",B:"",C:"",D:""};
+const questionTen = {A:"",B:"",C:"",D:""}; */
 
 
-// Function to stop the timer
-function stopTimer() {
-  clearInterval(timerInterval);
-}
 
 // Function to end the quiz
 function endQuiz() {
   // Display the score screen or any other actions you need to take when the quiz ends
+  
 }
 
 // Example usage: Call startTimer() when you start the quiz
@@ -71,31 +105,33 @@ function endQuiz() {
 // Example usage: Call startTimer() when you start the quiz
 startTimer();
 
+showQuestion(data[currentIndex]);
+
 
 
 //implement functionality for starting the timer
 
 // present the questions
-function showQuestion(){
-
+function showQuestion(currentItem) {
+    // stuff item properties into html
 }
 
 //handling user answers
-function checkAnswers(){
+function checkAnswers() {
 
 }
 
 //subtracting time for incorrect answers
-function subtractTime(){
+function subtractTime() {
 
 }
 
 //ending the game
-function endGame(){
+function endGame() {
 
 }
 
 // allow user to save their initials and score
-function saveScore(){
+function saveScore() {
 
 }
